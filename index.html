@@ -14,17 +14,36 @@
     <title>Used</title>
 </head>
 <body>
-    <div id="app">
+    <div id="app"  @click="collapsed=false">
         <!-- 头部 S -->
         <header>
             <nav class="header-top flex flex-between">
-                <div class="nav-li"><i class="iconfont menu">&#xe62c;</i></div>
+                <div class="nav-li"><i class="iconfont menu" @click.stop="collapsed=!collapsed">&#xe62c;</i></div>
                 <div class="nav-li">综合</div>
                 <div class="nav-li"><i class="iconfont menu">&#xe801;</i></div>
             </nav>
             <div class="tabs flex">
                 <div class="tab " :class="{activeTab:activeTab=='1'}" @click="activeTab='1'"><a class="linkToday">今天</a></div>
                 <div class="tab" :class="{activeTab:activeTab=='2'}" @click="activeTab='2'"><a class="linkToday">明天</a></div>
+            </div>
+            
+            <div class="dropdown-menu" :class="{isShow:collapsed}" >
+                <div @click.stop="collapsed=true">
+                    <div class="menu-head" @click="collapsed=false"><span></span> 主菜单</div>
+                    <ul class="menu-body">
+                        <li>
+                            <ul>
+                                <li><a>足球</a></li>
+                                <li><a>篮球</a></li>
+                                <li><a>棒球</a></li>
+                                <li><a>网球</a></li>
+                                <li><a>排球</a></li>
+                                <li><a>其他</a></li>
+                                <li><a>体育公告</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </header>
         <!-- 头部 E -->
@@ -173,6 +192,7 @@
     var app = new Vue({
         el: "#app",
         data: {
+            collapsed:false,
             moneys: '',
             buttons: [100, 200, 300, 500],
             dialogOpen: false,
